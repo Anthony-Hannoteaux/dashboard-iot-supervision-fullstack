@@ -168,3 +168,173 @@ Une alerte est déclenchée si :
 - Implémentation des alertes (logique métier)
 - Affichage des alertes dans le dashboard
 - Améliorations UI/UX
+
+## 8. Conception UX/UI — Structure des interfaces
+
+### Objectif
+
+Définir la structure des interfaces utilisateur du MVP afin d’assurer une navigation claire, une lecture efficace des données et une cohérence globale de l’application.
+
+---
+
+### Structure de l’application
+
+L’application est composée de quatre pages principales :
+
+- Dashboard
+- Historique des mesures
+- Détail d’un capteur
+- Page des alertes
+
+Aucun système d’authentification n’est prévu dans le MVP.
+
+L’utilisateur accède directement au Dashboard.
+
+---
+
+### 1. Dashboard
+
+### Objectif
+
+Fournir une vue globale des données issues des capteurs afin de permettre une compréhension rapide de l’état du système.
+
+### Contenu
+
+- Header :
+    - Titre de la page
+    - Filtres temporels (heure, jour, semaine, mois)
+- Cartes de statut :
+    - Température actuelle
+    - Humidité actuelle
+    - Nombre d’alertes actives
+- Graphique principal :
+    - Évolution des mesures dans le temps
+- Alertes récentes :
+    - Type
+    - Niveau
+    - Timestamp
+    - Accès vers les pages associées
+
+---
+
+### 2. Historique des mesures
+
+### Objectif
+
+Permettre l’analyse détaillée des données enregistrées.
+
+### Contenu
+
+- Filtres :
+    - Période (heure, jour, semaine, mois)
+    - Type de capteur (température, humidité)
+- Tableau des mesures :
+    - Timestamp
+    - Capteur
+    - Valeur
+    - Unité
+- Graphiques :
+    - Visualisation des données en fonction des filtres appliqués
+
+---
+
+### 3. Détail d’un capteur
+
+### Objectif
+
+Afficher l’ensemble des informations relatives à un capteur spécifique.
+
+### Contenu
+
+- Informations générales :
+    - Nom
+    - Localisation
+    - Type
+- État du capteur :
+    - Batterie
+    - Statut
+- Seuils d’alerte :
+    - Valeur minimale
+    - Valeur maximale
+- Graphique dédié :
+    - Évolution des mesures du capteur
+- Historique :
+    - Tableau des mesures associées
+- Alertes :
+    - Liste des alertes liées au capteur
+
+---
+
+### 4. Page des alertes
+
+### Objectif
+
+Centraliser les anomalies détectées sur les capteurs.
+
+### Contenu
+
+- Liste des alertes :
+    - Type
+    - Niveau
+    - Timestamp
+- Filtres :
+    - Type de capteur
+    - Niveau d’alerte
+    - Période
+- Navigation :
+    - Accès au détail du capteur concerné
+
+---
+
+## 9. Navigation
+
+L’application adopte une approche **mobile first**.
+
+### Navigation mobile
+
+Sur mobile, la navigation est pensée pour une utilisation simple et fluide :
+
+- Organisation verticale des contenus (lecture de haut en bas)
+- Accès aux différentes pages via un menu de type "burger"
+- Navigation minimaliste afin de privilégier la lisibilité des données
+
+---
+
+### Navigation desktop
+
+Sur desktop, l’application utilise une navigation latérale permettant d’accéder aux sections principales :
+
+- Dashboard
+- Historique des mesures
+- Alertes
+
+L’accès au détail d’un capteur se fait via des interactions contextuelles (tableaux, alertes, dashboard).
+
+---
+
+### Organisation des données — Dashboard
+
+Les données du Dashboard sont organisées **par zone (pièce)** afin de refléter un cas d’usage réel.
+
+Dans le cadre du MVP, l’application simule une habitation composée de trois zones :
+
+- Salon
+- Cuisine
+- Chambre
+
+Chaque zone est représentée par un groupe de cartes contenant :
+
+- Température
+- Humidité
+- Nombre d’alertes
+- Un graphique associé
+
+Le graphique affiche par défaut l’évolution des données sur une journée.
+
+Cette organisation permet :
+
+- Une lecture rapide par zone
+- Une meilleure contextualisation des données
+- Une navigation plus intuitive pour l’utilisateur
+
+---

@@ -40,6 +40,43 @@ Afin de permettre une démonstration immédiate des fonctionnalités (historique
 
 ---
 
+## Interface utilisateur (UX/UI)
+
+L’application est conçue selon une approche **mobile first** afin de garantir une utilisation fluide sur tous les supports.
+
+Elle s’articule autour de **quatre pages principales** :
+
+* **Dashboard** : vue globale des données avec indicateurs clés, graphiques et alertes récentes
+* **Historique des mesures** : analyse détaillée avec filtres temporels et tableau des données
+* **Détail d’un capteur** : informations complètes d’un capteur (état, seuils, historique, alertes)
+* **Alertes** : centralisation des anomalies détectées
+
+### Organisation du Dashboard
+
+Les données sont organisées **par zone (pièce)** afin de refléter un cas d’usage réaliste.
+
+Dans le cadre de la démonstration, l’application simule une habitation composée de :
+
+* Salon
+* Cuisine
+* Chambre
+
+Chaque zone regroupe :
+
+* Température
+* Humidité
+* Nombre d’alertes
+* Un graphique d’évolution (affiché sur une journée par défaut)
+
+### Navigation
+
+* **Mobile** : navigation verticale avec menu burger
+* **Desktop** : navigation latérale (sidebar)
+
+L’accès au détail d’un capteur se fait via des interactions contextuelles (dashboard, tableaux, alertes).
+
+---
+
 ## Stack technique
 
 ### Frontend
