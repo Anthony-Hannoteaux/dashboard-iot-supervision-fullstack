@@ -70,7 +70,7 @@ Chaque zone regroupe :
 
 ### Navigation
 
-* **Mobile** : navigation verticale avec menu burger
+* **Mobile** : navigation verticale avec barre de navigation située en bas de page 
 * **Desktop** : navigation latérale (sidebar)
 
 L’accès au détail d’un capteur se fait via des interactions contextuelles (dashboard, tableaux, alertes).
@@ -235,3 +235,4 @@ Ces scripts permettent de :
 ## Documentation
 
 * [Cahier des charges](./docs/cahier-des-charges.md)
+* [Wireframe (Mobile/Desktop)](<docs/Wireframe (Mobile - Desktop).png>)
