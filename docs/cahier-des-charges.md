@@ -295,7 +295,7 @@ L’application adopte une approche **mobile first**.
 Sur mobile, la navigation est pensée pour une utilisation simple et fluide :
 
 - Organisation verticale des contenus (lecture de haut en bas)
-- Accès aux différentes pages via un menu de type "burger"
+- Accès aux différentes pages via la barre de navigation située en bas de page
 - Navigation minimaliste afin de privilégier la lisibilité des données
 
 ---
