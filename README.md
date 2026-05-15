@@ -65,7 +65,6 @@ Chaque zone regroupe :
 
 * Température
 * Humidité
-* Nombre d’alertes
 * Un graphique d’évolution (affiché sur une journée par défaut)
 
 ### Navigation
@@ -99,7 +98,8 @@ L’accès au détail d’un capteur se fait via des interactions contextuelles 
 * Git / GitHub
 * Whimsical (Wireframes)
 * Figma (Maquettes graphiques)
-* Postman
+* RESTClient
+* Docker
 
 ---
 
@@ -236,3 +236,4 @@ Ces scripts permettent de :
 
 * [Cahier des charges](./docs/cahier-des-charges.md)
 * [Wireframe (Mobile/Desktop)](<docs/Wireframe (Mobile - Desktop).png>)
+* [Charte et Maquettes Graphiques (Mobile/Desktop)](https://www.figma.com/design/2Q7SbIW21Bynv4JQrIN2nj/Maquette-Graphique---Dashboard-IoT?node-id=0-1&t=cQhnD4vse5NKivmr-1)

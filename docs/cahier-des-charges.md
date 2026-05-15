@@ -50,7 +50,8 @@ Outils :
 - Git / GitHub
 - Whimsical (Wireframes)
 - Figma (Maquettes graphiques)
-- Postman (tests API)
+- RESTClient (tests API)
+- Docker
 
 ## 6. Modélisation des données (simplifiée)
 
@@ -206,9 +207,8 @@ Fournir une vue globale des données issues des capteurs afin de permettre une c
 - Cartes de statut :
     - Température actuelle
     - Humidité actuelle
-    - Nombre d’alertes actives
-- Graphique principal :
-    - Évolution des mesures dans le temps
+    - Graphique principal :
+        - Évolution des mesures dans le temps (24h par défault)
 - Alertes récentes :
     - Type
     - Niveau
@@ -326,7 +326,6 @@ Chaque zone est représentée par un groupe de cartes contenant :
 
 - Température
 - Humidité
-- Nombre d’alertes
 - Un graphique associé
 
 Le graphique affiche par défaut l’évolution des données sur une journée.
