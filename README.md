@@ -18,7 +18,7 @@ Afin de permettre une démonstration immédiate des fonctionnalités (historique
 ## Objectifs du projet
 
 * Concevoir une API REST pour recevoir des données simulées
-* Stocker les données dans une base MongoDB
+* Stocker les données dans une base PostgreSQL
 * Structurer les données autour de capteurs et de mesures
 * Traiter et exploiter les données reçues
 * Afficher les informations via une interface React
@@ -81,25 +81,39 @@ L’accès au détail d’un capteur se fait via des interactions contextuelles 
 ### Frontend
 
 * React.js
+* Vite
 * React Router
 * SCSS
+* Recharts
 
 ### Backend
 
 * Node.js
 * Express.js
+* Vitest
 
 ### Base de données
 
-* MongoDB
+* PostgreSQL
+
+### Tests
+
+* Vitest
+* REST Client
+
+### Déploiement
+
+* Vercel pour le frontend
+* Render pour l’API
+* Render Postgres pour la base de données
 
 ### Outils
 
 * Git / GitHub
 * Whimsical (Wireframes)
 * Figma (Maquettes graphiques)
-* RESTClient
 * Docker
+* Docker Compose
 
 ---
 
@@ -120,104 +134,90 @@ L’accès au détail d’un capteur se fait via des interactions contextuelles 
 
 /scripts
 
-* seedHistory.js → génération de données historiques (longue période)
-* seedAlerts.js → simulation de dépassements de seuil
+* script de seed SQL à venir
 
 ---
 
-## Modèle de données
+## Modèle de données (Simplifié)
 
 Chaque capteur est associé à un seul type de mesure (température ou humidité).
+
+### Location (Localisation)
+
+```json
+{
+  "id": 1,
+  "name": "Salon"
+}
+```
 
 ### Sensor (Capteur)
 
 ```json
 {
-  "id": "sensor-001",
+  "id": 1,
   "name": "Capteur température salon",
   "type": "temperature",
-  "location": "Salon",
   "battery": 87,
-  "isActive": true,
-  "alertThresholds": {
-    "min": 18,
-    "max": 28
-  },
-  "createdAt": "2026-05-01T10:00:00Z"
+  "is_active": true,
+  "minimum_threshold": 18,
+  "maximum_threshold": 28,
+  "createdAt": "2026-05-01T10:00:00Z",
+  "location_id": 1
 }
 ```
 
-### Measurement (Mesure)
+### Measure (Mesure)
 
 ```json
 {
-  "id": "measure-001",
-  "sensorId": "sensor-001",
+  "id": 1,
   "value": 24.8,
   "unit": "°C",
-  "timestamp": "2026-05-01T10:15:00Z"
+  "recorded_at": "2026-05-01T10:15:00Z",
+  "sensor_id": 1
+}
+```
+
+### Alert (Alerte)
+
+```json
+{
+  "id": 1,
+  "alert_type": "maximum_threshold",
+  "urgency_degree": "warning",
+  "message": "Température du salon supérieure au seuil maximal",
+  "is_active": true,
+  "threshold_value": 28,
+  "created_at": "2026-05-01T10:15:00Z",
+  "resolved_at": null,
+  "measure_id": 1
 }
 ```
 
 ---
 
-## Installation
+## Tests
 
-### 1. Cloner le projet
+Le projet prévoit plusieurs niveaux de tests :
 
-```bash
-git clone git@github.com:Anthony-Hannoteaux/dashboard-iot-supervision-fullstack.git
-cd dashboard-iot-supervision-fullstack
-```
+- tests unitaires avec Vitest
+- tests fonctionnels avec Vitest
+- tests manuels des routes API avec REST Client
 
-### 2. Backend
-
-```bash
-cd backend
-npm install
-npm run dev
-```
-
-### 3. Frontend
-
-```bash
-cd frontend
-npm install
-npm run dev
-```
+Les tests permettront de vérifier la logique métier, les services backend, les routes principales de l’API et la cohérence des réponses retournées au frontend.
 
 ---
 
-## Génération de données
+## Déploiement prévu
 
-Le projet inclut plusieurs scripts pour faciliter les tests et la démonstration.
+Le déploiement de l’application sera séparé en trois parties :
 
-Ces scripts permettent de rendre l’application immédiatement testable sans dépendre d’une génération de données en temps réel.
+* frontend React déployé sur Vercel
+* API Express déployée sur Render
+* base de données PostgreSQL hébergée avec Render Postgres
 
-### Génération d’historique
-
-Permet de précharger la base de données avec des données réalistes sur une longue période.
-
-```bash
-node scripts/seedHistory.js
-```
-
-### Simulation d’alertes
-
-Permet d’injecter des valeurs anormales afin de tester le système d’alertes.
-
-```bash
-node scripts/seedAlerts.js
-```
-
-### Objectif
-
-Ces scripts permettent de :
-
-* tester immédiatement les filtres temporels
-* visualiser un historique riche de données
-* valider le comportement des alertes
-* éviter toute dépendance au temps réel
+Les URLs et informations sensibles seront configurées via des variables d’environnement afin de séparer les environnements de développement et de production.
 
 ---
 

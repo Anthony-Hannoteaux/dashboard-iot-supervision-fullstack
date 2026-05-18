@@ -26,34 +26,66 @@ Fonctionnalités principales :
 - Intégration du protocole MQTT pour la réception des données
 - Connexion à un capteur physique réel
 - Authentification utilisateur (admin / utilisateur)
-- Gestion de plusieurs capteurs
+- Administration avancée des capteurs
 
 ## 5. Stack technique :
 
-Frontend :
+### Frontend
 
-- React.js
-- React Router
-- SCSS
+* React.js
+* Vite
+* React Router
+* SCSS
+* Recharts
 
-Backend :
+### Backend
 
-- Node.js
-- Express.js
+* Node.js
+* Express.js
+* Vitest
 
-Base de données :
+### Base de données
 
-- MongoDB
+* PostgreSQL
 
-Outils :
+### Tests
 
-- Git / GitHub
-- Whimsical (Wireframes)
-- Figma (Maquettes graphiques)
-- RESTClient (tests API)
-- Docker
+* Vitest
+* REST Client
 
-## 6. Modélisation des données (simplifiée)
+### Déploiement
+
+* Vercel pour le frontend
+* Render pour l’API
+* Render Postgres pour la base de données
+
+### Outils
+
+* Git / GitHub
+* Whimsical (Wireframes)
+* Figma (Maquettes graphiques)
+* Docker
+* Docker Compose
+
+## 6. Modélisation des données
+
+### Location (Localisation)
+
+Représente une pièce unique.
+
+- id
+- name
+
+**Exemple :**
+
+```json
+{
+  "id": 1,
+  "name": "Salon"
+}
+```
+
+---
 
 ### Sensor (Capteur)
 
@@ -64,62 +96,161 @@ Chaque capteur mesure un seul type de variable.
 - id
 - name
 - type (temperature | humidity)
-- location
 - battery
-- isActive
-- alertThresholds
-    - min
-    - max
-- createdAt
+- is_active
+- minimum_threshold
+- maximum_threshold
+- created_at
+- location_id
 
 **Exemple :**
 
 ```json
 {
-  "id": "sensor-001",
+  "id": 1,
   "name": "Capteur température salon",
   "type": "temperature",
-  "location": "Salon",
   "battery": 87,
-  "isActive": true,
-  "alertThresholds": {
-    "min": 18,
-    "max": 28
-  },
-  "createdAt": "2026-05-01T10:00:00Z"
+  "is_active": true,
+  "minimum_threshold": 18,
+  "maximum_threshold": 28,
+  "created_at": "2026-05-01T10:00:00Z",
+  "location_id": 1
 }
 ```
 
 ---
 
-### Measurement (Mesure)
+### Measure (Mesure)
 
 Représente une mesure unique issue d’un capteur.
 
 - id
-- sensorId
 - value
 - unit
-- timestamp
+- recorded_at
+- sensor_id
 
 **Exemple :**
 
 ```json
 {
-  "id": "measure-001",
-  "sensorId": "sensor-001",
+  "id": 1,
   "value": 24.8,
   "unit": "°C",
-  "timestamp": "2026-05-01T10:15:00Z"
+  "recorded_at": "2026-05-01T10:15:00Z",
+  "sensor_id": 1
 }
+```
+
+---
+
+### Alert (Alerte)
+
+Représente une alerte unique issue d’une mesure.
+
+- id
+- type_alerte
+- degré_urgence
+- message
+- is_active
+- valeur_seuil
+- date_creation
+- date_resolution
+- measure_id
+
+**Exemple :**
+
+```json
+{
+    "id": 1,
+    "alert_type": "maximum_threshold",
+    "urgency_degree": "warning",
+    "message": "Température du salon supérieure au seuil maximal",
+    "is_active": true,
+    "threshold_value": 28,
+    "created_at": "2026-05-01T10:15:00Z",
+    "resolved_at": null,
+    "measure_id": 1
+}
+```
+
+---
+
+Pour l'élaboration de la base de donnée, nous suivrons la méthode de conception Merise :
+
+### MCD
+
+![MCD - Dashboard-IoT](MCD.svg)
+
+---
+
+### MLD
+
+```
+location (id, name)
+
+sensor (id, name, type, battery, is_active, minimum_threshold, maximum_threshold, created_at, #location_id)
+
+measure (id, value, unit, recorded_at, #sensor_id)
+
+alert (id, alert_type, urgency_degree, message, is_active, threshold_value, created_at, resolved_at, #measure_id)
+
+```
+---
+
+### MPD
+
+```sql
+location (
+  "id" INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  "name" TEXT UNIQUE NOT NULL
+);
+
+sensor (
+  "id" INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  "name" TEXT UNIQUE NOT NULL,
+  "type" TEXT NOT NULL,
+  "battery" INTEGER NOT NULL CHECK ("battery" >= 0 AND battery <= 100),
+  "is_active" BOOLEAN NOT NULL DEFAULT TRUE,
+  "minimum_threshold" DOUBLE PRECISION NOT NULL,
+  "maximum_threshold" DOUBLE PRECISION NOT NULL,
+  "created_at" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  "location_id" INTEGER NOT NULL REFERENCES location("id"),
+  CHECK ("minimum_threshold" < "maximum_threshold")
+);
+
+measure (
+  "id" INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  "value" DOUBLE PRECISION NOT NULL,
+  "unit" TEXT NOT NULL,
+  "recorded_at" TIMESTAMP NOT NULL,
+  "sensor_id" INTEGER NOT NULL REFERENCES sensor("id"),
+  UNIQUE ("sensor_id", "recorded_at")
+);
+
+alert (
+  "id" INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  "alert_type" TEXT NOT NULL,
+  "urgency_degree" TEXT NOT NULL,
+  "message" TEXT NOT NULL,
+  "is_active" BOOLEAN NOT NULL DEFAULT TRUE,
+  "threshold_value" DOUBLE PRECISION NOT NULL,
+  "created_at" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  "resolved_at" TIMESTAMP,
+  "measure_id" INTEGER UNIQUE NOT NULL REFERENCES measure("id")
+);
+
 ```
 
 ---
 
 ### Relation entre les données
 
-- Un **Sensor** peut avoir plusieurs **Measurements**
-- Chaque **Measurement** est associée à un seul **Sensor** via `sensorId`
+- Une **Location** peut avoir plusieurs **Sensor**
+- Un **Sensor** peut avoir plusieurs **Measure**
+- Chaque **Measure** est associée à un seul **Sensor** via `sensor_id`
+- Chaque **Alert** est associée à une seule **Measure** via `measure_id`
 
 ---
 
@@ -129,8 +260,8 @@ Les seuils d’alerte sont définis au niveau du **Sensor**.
 
 Une alerte est déclenchée si :
 
-- la valeur est inférieure à `min`
-- la valeur est supérieure à `max`
+- la valeur est inférieure à `minimum_threshold`
+- la valeur est supérieure à `maximum_threshold`
 
 ## 7. Roadmap (méthode agile) :
 
@@ -149,7 +280,7 @@ Une alerte est déclenchée si :
 
 ### Sprint 2 :
 
-- Connexion MongoDB
+- Connexion PostgreSQL
 - Implémentation du stockage des mesures
 
 ### Sprint 3 :
@@ -169,6 +300,14 @@ Une alerte est déclenchée si :
 - Implémentation des alertes (logique métier)
 - Affichage des alertes dans le dashboard
 - Améliorations UI/UX
+
+### Sprint 6 :
+
+- Préparation Docker pour la production
+- Configuration des variables d’environnement
+- Déploiement de l’API sur Render
+- Déploiement de PostgreSQL avec Render Postgres
+- Déploiement du frontend sur Vercel
 
 ## 8. Conception UX/UI — Structure des interfaces
 
@@ -208,7 +347,7 @@ Fournir une vue globale des données issues des capteurs afin de permettre une c
     - Température actuelle
     - Humidité actuelle
     - Graphique principal :
-        - Évolution des mesures dans le temps (24h par défault)
+        - Évolution des mesures dans le temps (24h par défaut)
 - Alertes récentes :
     - Type
     - Niveau
