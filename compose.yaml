@@ -5,6 +5,8 @@ services:
     restart: unless-stopped
     ports:
       - "${POSTGRES_HOST_PORT}:5432"
+    # Variables utilisées par l'image PostgreSQL
+    # https://hub.docker.com/_/postgres#environment-variables
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
