@@ -1,0 +1,5 @@
+BEGIN;
+
+TRUNCATE TABLE alert, measure, sensor, location RESTART IDENTITY CASCADE;
+
+COMMIT;
