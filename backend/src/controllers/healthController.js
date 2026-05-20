@@ -12,10 +12,10 @@ const healthController = {
 
     // On vérifie que l'API interroge correctement PostgreSQL
     getDatabaseHealth: async (req, res) => {
-        const result = await pool.query(`
-            SELECT NOW() AS current_time
-            `)
         try {
+            const result = await pool.query(`
+                SELECT NOW() AS current_time
+                `)
             res.status(200).json({
                 status: "OK",
                 message: "Connexion avec PostgreSQL établi avec succès",
