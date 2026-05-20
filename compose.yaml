@@ -1,4 +1,29 @@
 services:
+  api:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.dev
+    container_name: dashboard-iot-api-dev
+    restart: unless-stopped
+    ports:
+      - "${BACKEND_HOST_PORT}:3000"
+    environment:
+      NODE_ENV: development
+      PORT: 3000
+      # On utilise le réseau interne de Docker Compose
+      # Nos conteneurs communiquent directement via leur nom de service
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: ${POSTGRES_DB}
+      DB_USER: ${POSTGRES_USER}
+      DB_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - ./backend:/app
+      - api_node_modules:/app/node_modules
+    depends_on:
+      postgres:
+        condition: service_healthy
+
   postgres:
     image: postgres:18-alpine
     container_name: dashboard-iot-postgres-dev
@@ -17,8 +42,10 @@ services:
     # https://docs.docker.com/reference/compose-file/services/#healthcheck
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
-      interval: 1m30s
-      timeout: 10s
-      retries: 3
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
 volumes:
   pgdata:
+  api_node_modules:
