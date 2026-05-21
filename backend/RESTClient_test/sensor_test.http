@@ -1,0 +1,3 @@
+### GET all sensors
+GET http://localhost:3000/api/sensors
+Content-Type: application/json; charset=utf-8
