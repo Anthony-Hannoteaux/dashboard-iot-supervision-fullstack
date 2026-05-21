@@ -11,7 +11,7 @@ const measureController = {
             });
         } catch (error) {
             return res.status(500).json({
-                status: "Echèc",
+                status: "Echec",
                 message: "Erreur survenue lors de la récupération des messures",
                 error: error.message
             });
