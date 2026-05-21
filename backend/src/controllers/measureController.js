@@ -17,6 +17,33 @@ const measureController = {
             });
         };
     },
+
+    // Route GET /api/sensors/:sensorId/measures
+    getMeasureBySensorId: async (req, res) => {
+        try {
+            const sensorId = Number(req.params.sensorId);
+
+            if (!Number.isInteger(sensorId) || sensorId <= 0) {
+                return res.status(400).json({
+                    status: "Echec",
+                    message: "L'identifiant du capteur est invalide",
+                })
+            }
+            
+            const result = await Measure.findMeasureBySensorId(sensorId);
+            return res.status(200).json({
+                status: "Succès",
+                data: result
+            })
+            
+        } catch (error) {
+            return res.status(500).json({
+                status: "Echec",
+                message: "Erreur survenue lors de la récupération des messures",
+                error: error.message
+            });
+        }
+    }
 };
 
 export default measureController;
