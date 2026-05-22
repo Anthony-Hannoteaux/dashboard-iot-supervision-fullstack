@@ -44,6 +44,35 @@ class Measure {
         )
         return result.rows
     };
+
+    /**
+     * Requête permettant de récupérer les valeurs nécessaire au calcul d'une alerte :
+     * - Les IDs, valeurs, unités et date d'enregistrement des MESURES
+     * - Les IDs, noms, types, seuils limites des CAPTEURS
+     * - Les IDs et noms des LOCALISATIONS
+     * - ORDONNEES de la plus récente à la plus ancienne
+     */
+    static async findMeasuresWithThreslholds() {
+        const result = await pool.query(`
+            SELECT
+                m.id AS measure_id,
+                m.value,
+                m.unit,
+                m.recorded_at,
+                s.id AS sensor_id,
+                s.name,
+                s.type,
+                s.minimum_threshold,
+                s.maximum_threshold,
+                l.id AS location_id,
+                l.name
+            FROM measure AS m
+            JOIN sensor AS s ON m.sensor_id = s.id
+            JOIN location AS l ON s.location_id = l.id
+            ORDER BY m.recorded_at DESC;
+            `);
+        return result.rows;
+    };
 };
 
 export default Measure;
