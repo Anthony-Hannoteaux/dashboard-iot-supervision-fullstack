@@ -37,7 +37,7 @@ class Alert {
             alert.threshold_value,
             alert.measure_id
         ])
-        return result.rows[0] || null
+        return result
     }
 }
 

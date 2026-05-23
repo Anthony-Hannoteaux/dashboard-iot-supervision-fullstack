@@ -1,0 +1,3 @@
+### POST Generate alerts from existing measures
+POST http://localhost:3000/api/alerts
+Content-Type: application/json; charset=utf-8

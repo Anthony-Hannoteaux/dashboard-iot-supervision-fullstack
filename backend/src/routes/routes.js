@@ -3,6 +3,7 @@ import healthRouter from "./healthRoutes.js"
 import locationRouter from "./locationRoutes.js";
 import sensorRouter from "./sensorRoutes.js";
 import measureRouter from "./measureRoutes.js";
+import alertRouter from "./alertRouters.js";
 
 const router = express.Router();
 
@@ -17,5 +18,8 @@ router.use('/sensors', sensorRouter);
 
 // Endpoint communiquant avec la table "measure"
 router.use('/measures', measureRouter);
+
+// Endpoint communiquant avec la table "alert"
+router.use('/alerts', alertRouter);
 
 export default router;
