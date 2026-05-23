@@ -60,12 +60,12 @@ class Measure {
                 m.unit,
                 m.recorded_at,
                 s.id AS sensor_id,
-                s.name,
+                s.name AS sensor_name,
                 s.type,
                 s.minimum_threshold,
                 s.maximum_threshold,
                 l.id AS location_id,
-                l.name
+                l.name AS location_name
             FROM measure AS m
             JOIN sensor AS s ON m.sensor_id = s.id
             JOIN location AS l ON s.location_id = l.id
