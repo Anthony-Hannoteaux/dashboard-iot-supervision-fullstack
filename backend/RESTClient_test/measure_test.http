@@ -9,3 +9,7 @@ Content-Type: application/json; charset=utf-8
 ### GET measures by sensorid (error)
 GET http://localhost:3000/api/sensors/dskfjq/measures
 Content-Type: application/json; charset=utf-8
+
+### GET measures with thresholds
+GET http://localhost:3000/api/measures/thresholds
+Content-Type: application/json; charset=utf-8
