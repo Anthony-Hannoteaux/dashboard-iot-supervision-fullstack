@@ -1,6 +1,6 @@
 import Alert from "../models/Alert.js";
 import Measure from "../models/Measure.js";
-import alertUtils from "../../utils/alertUtils.js";
+import alertUtils from "../utils/alertUtils.js";
 
 const alertController = {
     // Route POST /api/alerts

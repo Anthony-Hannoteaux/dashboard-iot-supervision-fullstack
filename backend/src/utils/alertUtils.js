@@ -1,5 +1,3 @@
-import Measure from "../src/models/Measure.js";
-
 // Utilitaire permettant de traiter les seuils limites lors de la génération d'alerte
 
 /**
@@ -42,6 +40,7 @@ const alertUtils = {
      * @param { number } measure.value - Valeur de la mesure
      * @param { number } measure.minimum_threshold - Seuil minimal du capteur
      * @param { number } measure.maximum_threshold - Seuil maximal du capteur
+     * @param { string } measure.type - Type de mesure enregistrée (temperature/humidity)
      * @param { string } measure.location_name - Nom de la salle où se situe le capteur
      * Retourne les détails de l'alerte sous forme d'objet
      * @returns { Object } - Objet contenant les valeurs nécessaires à l'enregistrement de l'alerte
