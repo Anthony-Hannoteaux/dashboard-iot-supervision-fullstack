@@ -3,6 +3,22 @@ import Measure from "../models/Measure.js";
 import alertUtils from "../utils/alertUtils.js";
 
 const alertController = {
+    // Route GET /api/alert
+    getAllAlerts: async (req, res) => {
+        try {
+            const result = await Alert.findAll();
+            return res.status(200).json({
+                status: "Succès",
+                data: result
+            })
+        } catch (error) {
+            return res.status(500).json({
+                status: "Echec",
+                message: "Erreur survenue lors de la récupération des alertes",
+                error: error.message
+            })
+        }
+    },
     // Route POST /api/alerts
     createAlerts: async (req, res) => {
         try {
@@ -18,18 +34,19 @@ const alertController = {
 
             for (const alert of alerts) {
                 const result = await Alert.create(alert)
-
-                // Si aucun nouvel enregistrer n'est effectué
-                if (!result.rows[0]) {
-                    return res.status(200).json({
-                        status: "OK",
-                        message: "Aucune nouvelle alerte détectée"
-                    })
-                }
-                else {
+                if (result.rows[0]) {
                     alertArray.push(result.rows[0])
                 }
             }
+            
+            // Si aucun nouvel enregistrer n'est effectué
+            if (alertArray.length === 0) {
+                return res.status(200).json({
+                    status: "OK",
+                    message: "Aucune nouvelle alerte détectée"
+                })
+            }
+            
             // Si au moins un enregistrement est effectué
             return res.status(201).json({
                 status: "Succès",
