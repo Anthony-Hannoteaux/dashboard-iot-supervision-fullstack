@@ -5,3 +5,7 @@ Content-Type: application/json; charset=utf-8
 ### GET all measures for dashboard page
 GET http://localhost:3000/api/dashboard/sensor/1/measures?period=last-day
 Content-Type: application/json; charset=utf-8
+
+### GET all alerts for dashboard page
+GET http://localhost:3000/api/dashboard/alerts
+Content-Type: application/json; charset=utf-8
