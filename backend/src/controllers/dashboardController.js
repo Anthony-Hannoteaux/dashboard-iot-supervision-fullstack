@@ -28,7 +28,7 @@ const dashboardControler = {
             // On définit les périodes autorisés
             const allowedPeriods = ["last-hour", "last-day", "last-week"]
             const sensorId = Number(req.params.sensorId);
-            const period = req.query.period
+            const period = req.query.period || "last-hour"
 
             if (!Number.isInteger(sensorId) || sensorId <= 0) {
                 return res.status(400).json({
