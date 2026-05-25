@@ -227,7 +227,7 @@ Remarque : Le changement du port est facultatif, à réaliser si nécessaire.
 Depuis la racine du projet :
 
 ```bash
-docker compose up
+docker compose up -d
 ```
 
 ### 5. Lancer la création de la base de données et le seeding des tables

@@ -242,4 +242,7 @@ Les URLs et informations sensibles seront configurées via des variables d’env
 * [Charte et Maquettes Graphiques (Mobile/Desktop)](https://www.figma.com/design/2Q7SbIW21Bynv4JQrIN2nj/Maquette-Graphique---Dashboard-IoT?node-id=0-1&t=cQhnD4vse5NKivmr-1)
 
 ### Documentation du projet
+
+Note : Vous y trouverez les procèdures d'installation de l'environnement de développement
+
 * [README Backend](./backend/README.md)
