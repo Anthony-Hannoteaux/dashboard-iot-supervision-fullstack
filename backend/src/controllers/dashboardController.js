@@ -31,14 +31,14 @@ const dashboardControler = {
             const period = req.query.period
 
             if (!Number.isInteger(sensorId) || sensorId <= 0) {
-                res.status(400).json({
+                return res.status(400).json({
                     status: "Echec",
                     message: "L'identifiant du capteur est invalide"
                 })
             }
             
             if (!allowedPeriods.includes(period)) {
-                res.status(400).json({
+                return res.status(400).json({
                     status: "Echec",
                     message: "La période est invalide"
                 })
