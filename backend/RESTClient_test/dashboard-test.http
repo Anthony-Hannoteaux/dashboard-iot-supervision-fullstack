@@ -1,0 +1,3 @@
+### GET all location for dashboard page
+GET http://localhost:3000/api/dashboard/locations
+Content-Type: application/json; charset=utf-8

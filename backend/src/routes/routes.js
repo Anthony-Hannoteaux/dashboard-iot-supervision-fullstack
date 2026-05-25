@@ -4,6 +4,7 @@ import locationRouter from "./locationRoutes.js";
 import sensorRouter from "./sensorRoutes.js";
 import measureRouter from "./measureRoutes.js";
 import alertRouter from "./alertRouters.js";
+import dashboardRouter from "./dashboardRouters.js";
 
 const router = express.Router();
 
@@ -21,5 +22,8 @@ router.use('/measures', measureRouter);
 
 // Endpoint communiquant avec la table "alert"
 router.use('/alerts', alertRouter);
+
+// Endpoint permettant de récupérer les données nécessaires au dashboard
+router.use("/dashboard", dashboardRouter);
 
 export default router;
