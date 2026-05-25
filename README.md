@@ -7,7 +7,6 @@ Ce projet est une application fullstack permettant de **simuler, stocker, traite
 L’objectif est de proposer un dashboard clair permettant :
 
 * le suivi des mesures (température, humidité)
-* la supervision des capteurs (état, batterie)
 * la détection d’anomalies
 * l’analyse de l’évolution des données dans le temps
 
@@ -21,22 +20,24 @@ Afin de permettre une démonstration immédiate des fonctionnalités (historique
 * Stocker les données dans une base PostgreSQL
 * Structurer les données autour de capteurs et de mesures
 * Traiter et exploiter les données reçues
-* Afficher les informations via une interface React
-* Mettre en place une logique d’alertes
 * Permettre la simulation et le test des données (historique + cas critiques)
+* Mettre en place une logique d’alertes
+* Afficher les informations via une interface React
+* Déployer l'application (frontend, backend et base de données)
 
 ---
 
 ## Fonctionnalités (MVP)
 
+* Génération de données historiques simulées
 * Réception de données simulées via API REST (générées par des scripts de seed)
+* Détection d’alertes (seuils)
+* Simulation de scénarios d’alertes
 * Stockage en base de données
 * Dashboard avec cartes de statut (capteurs)
-* Historique des mesures
 * Filtres temporels (heure / jour / semaine / mois)
-* Détection d’alertes (seuils)
-* Génération de données historiques simulées
-* Simulation de scénarios d’alertes
+* Affichage d'un historique des mesures (graphiques)
+* Déployer une première version de l'application
 
 ---
 
@@ -44,7 +45,7 @@ Afin de permettre une démonstration immédiate des fonctionnalités (historique
 
 L’application est conçue selon une approche **mobile first** afin de garantir une utilisation fluide sur tous les supports.
 
-Elle s’articule autour de **quatre pages principales** :
+Elle s’articulera autour de **quatre pages principales** :
 
 * **Dashboard** : vue globale des données avec indicateurs clés, graphiques et alertes récentes
 * **Historique des mesures** : analyse détaillée avec filtres temporels et tableau des données
@@ -53,7 +54,7 @@ Elle s’articule autour de **quatre pages principales** :
 
 ### Organisation du Dashboard
 
-Les données sont organisées **par zone (pièce)** afin de refléter un cas d’usage réaliste.
+Les données sont organisées par **zone (pièce)** afin de refléter un cas d’usage réaliste.
 
 Dans le cadre de la démonstration, l’application simule une habitation composée de :
 
@@ -72,7 +73,7 @@ Chaque zone regroupe :
 * **Mobile** : navigation verticale avec barre de navigation située en bas de page 
 * **Desktop** : navigation latérale (sidebar)
 
-L’accès au détail d’un capteur se fait via des interactions contextuelles (dashboard, tableaux, alertes).
+L’accès au détail d’un capteur se fait via des interactions contextuelles (dashboard, graphiques, alertes).
 
 ---
 
@@ -81,16 +82,15 @@ L’accès au détail d’un capteur se fait via des interactions contextuelles 
 ### Frontend
 
 * React.js
-* Vite
 * React Router
-* SCSS
 * Recharts
+* SCSS
+* Vite
 
 ### Backend
 
 * Node.js
 * Express.js
-* Vitest
 
 ### Base de données
 
@@ -121,20 +121,19 @@ L’accès au détail d’un capteur se fait via des interactions contextuelles 
 
 /backend
 
+* config
 * controllers
 * models
 * routes
-* services
+* utils
 
 /frontend
 
 * components
 * pages
-* services
+* utils
 
-/scripts
-
-* script de seed SQL à venir
+/database
 
 ---
 
@@ -184,9 +183,9 @@ Chaque capteur est associé à un seul type de mesure (température ou humidité
 ```json
 {
   "id": 1,
-  "alert_type": "maximum_threshold",
+  "alert_type": "tenperature_high",
   "urgency_degree": "warning",
-  "message": "Température du salon supérieure au seuil maximal",
+  "message": "Température élevée - Salon",
   "is_active": true,
   "threshold_value": 28,
   "created_at": "2026-05-01T10:15:00Z",
@@ -223,17 +222,24 @@ Les URLs et informations sensibles seront configurées via des variables d’env
 
 ## Evolution possibles
 
-* Script de mélange de données normales et critiques (seedMixed.js)
+* Déployement des pages suivantes :
+  - Historiques des mesures
+  - Détails d'un capteur
+  - Pages des alertes
+* Authentification utilisateur (admin / utilisateur)
+* Gestion multi-capteurs
+* Connexion à un capteur réel
 * Temps réel avec WebSocket
 * Intégration MQTT
-* Connexion à un capteur réel
-* Authentification utilisateur
-* Gestion multi-capteurs
 
 ---
 
 ## Documentation
 
+### Conception
 * [Cahier des charges](./docs/cahier-des-charges.md)
 * [Wireframe (Mobile/Desktop)](<docs/Wireframe (Mobile - Desktop).png>)
 * [Charte et Maquettes Graphiques (Mobile/Desktop)](https://www.figma.com/design/2Q7SbIW21Bynv4JQrIN2nj/Maquette-Graphique---Dashboard-IoT?node-id=0-1&t=cQhnD4vse5NKivmr-1)
+
+### Documentation du projet
+* [README Backend](./backend/README.md)

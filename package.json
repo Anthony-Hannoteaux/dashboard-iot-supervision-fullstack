@@ -1,0 +1,17 @@
+{
+  "name": "dashboard-iot-supervision-fullstack",
+  "version": "1.0.0",
+  "description": "Ce projet est une application fullstack permettant de **simuler, stocker, traiter et visualiser des données issues de capteurs IoT**.",
+  "private": true,
+  "scripts": {
+    "db:generate:alert": "curl -X POST http://localhost:3000/api/alerts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Anthony-Hannoteaux/dashboard-iot-supervision-fullstack.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Anthony-Hannoteaux/dashboard-iot-supervision-fullstack/issues"
+  },
+  "homepage": "https://github.com/Anthony-Hannoteaux/dashboard-iot-supervision-fullstack#readme"
+}

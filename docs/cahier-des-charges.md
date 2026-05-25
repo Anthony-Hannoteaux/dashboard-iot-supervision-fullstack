@@ -12,19 +12,22 @@ Développer une application permettant de superviser des données issues de capt
 
 Fonctionnalités principales :
 
-- Recevoir des données simulées via une API REST (générées par des scripts de seed)
 - Stocker les mesures dans une base de données
+- Recevoir des données simulées via une API REST (générées par des scripts de seed)
 - Visualiser les données sur un dashboard
 - Afficher les informations clés sous forme de cartes de statut
-- Consulter l’historique des mesures
 - Filtrer les données par période (heure, jour, semaine, mois)
 - Détecter et afficher des alertes en cas de dépassement de seuil
+- Déploiement de l'API
+- Déploiement de la base de données
+- Déploiement du frontend (Affichage de la page Dashboard)
 
 ## 4. Évolutions potentielles :
 
-- Mise à jour des données en temps réel (WebSocket)
-- Intégration du protocole MQTT pour la réception des données
+- Consulter l’historique des mesures
+- Consulter l’historique des alertes
 - Connexion à un capteur physique réel
+- Intégration du protocole MQTT pour la réception des données
 - Authentification utilisateur (admin / utilisateur)
 - Administration avancée des capteurs
 
@@ -33,16 +36,15 @@ Fonctionnalités principales :
 ### Frontend
 
 * React.js
-* Vite
 * React Router
-* SCSS
 * Recharts
+* SCSS
+* Vite
 
 ### Backend
 
 * Node.js
 * Express.js
-* Vitest
 
 ### Base de données
 
@@ -164,9 +166,9 @@ Représente une alerte unique issue d’une mesure.
 ```json
 {
     "id": 1,
-    "alert_type": "maximum_threshold",
+    "alert_type": "temperature_high",
     "urgency_degree": "warning",
-    "message": "Température du salon supérieure au seuil maximal",
+    "message": "Température élevée - Salon",
     "is_active": true,
     "threshold_value": 28,
     "created_at": "2026-05-01T10:15:00Z",
@@ -287,6 +289,7 @@ Une alerte est déclenchée si :
 
 - Génération de données simulées (seed historique)
 - Script de génération de données anormales (alertes)
+- Implémentation des alertes (logique métier)
 - Injection de données dans l’API
 
 ### Sprint 4 :
@@ -297,7 +300,6 @@ Une alerte est déclenchée si :
 
 ### Sprint 5 :
 
-- Implémentation des alertes (logique métier)
 - Affichage des alertes dans le dashboard
 - Améliorations UI/UX
 
@@ -319,7 +321,7 @@ Définir la structure des interfaces utilisateur du MVP afin d’assurer une nav
 
 ### Structure de l’application
 
-L’application est composée de quatre pages principales :
+L’application sera composée de quatre pages principales :
 
 - Dashboard
 - Historique des mesures
@@ -347,12 +349,11 @@ Fournir une vue globale des données issues des capteurs afin de permettre une c
     - Température actuelle
     - Humidité actuelle
     - Graphique principal :
-        - Évolution des mesures dans le temps (24h par défaut)
+        - Évolution des mesures dans le temps (dernières 24h par défaut)
 - Alertes récentes :
     - Type
     - Niveau
     - Timestamp
-    - Accès vers les pages associées
 
 ---
 
@@ -447,13 +448,13 @@ Sur desktop, l’application utilise une navigation latérale permettant d’acc
 - Historique des mesures
 - Alertes
 
-L’accès au détail d’un capteur se fait via des interactions contextuelles (tableaux, alertes, dashboard).
+L’accès au détail d’un capteur se fait via des interactions contextuelles (dashboard, graphiques, alertes).
 
 ---
 
 ### Organisation des données — Dashboard
 
-Les données du Dashboard sont organisées **par zone (pièce)** afin de refléter un cas d’usage réel.
+Les données du Dashboard sont organisées par **zone (pièce)** afin de refléter un cas d’usage réel.
 
 Dans le cadre du MVP, l’application simule une habitation composée de trois zones :
 
@@ -474,5 +475,3 @@ Cette organisation permet :
 - Une lecture rapide par zone
 - Une meilleure contextualisation des données
 - Une navigation plus intuitive pour l’utilisateur
-
----
