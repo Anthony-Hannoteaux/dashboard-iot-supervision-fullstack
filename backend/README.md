@@ -232,20 +232,11 @@ docker compose up -d
 
 ### 5. Lancer la création de la base de données et le seeding des tables
 
-Depuis la racine du projet, copier/coller la commande suivante :
+Depuis la racine du projet, initialiser la base de données et les premiers seeds :
 
 ```bash
-cat \
-database/schema.sql \
-database/seeding/00_reset.sql \
-database/seeding/01_location.sql \
-database/seeding/02_sensor.sql \
-database/seeding/03_measure_living_room.sql \
-database/seeding/04_measure.sql \
-| docker compose exec -T postgres sh -c 'psql -U "$POSTGRES_USER" -d "$POSTGRES_DB"'
+npm run db:init
 ```
-
-Note : l’automatisation de cette commande via un script npm est prévue dans une prochaine amélioration du projet.
 
 > Important : Les alertes sont générées directement par l'API à partir des mesures existantes et des seuils définis par les capteurs.
 

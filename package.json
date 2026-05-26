@@ -4,6 +4,7 @@
   "description": "Ce projet est une application fullstack permettant de **simuler, stocker, traiter et visualiser des données issues de capteurs IoT**.",
   "private": true,
   "scripts": {
+    "db:init": "cat database/schema.sql database/seeding/00_reset.sql database/seeding/01_location.sql database/seeding/02_sensor.sql database/seeding/03_measure_living_room.sql database/seeding/04_measure.sql | docker compose exec -T postgres sh -c \"psql -U $POSTGRES_USER -d $POSTGRES_DB\"",
     "db:generate:alert": "curl -X POST http://localhost:3000/api/alerts"
   },
   "repository": {
