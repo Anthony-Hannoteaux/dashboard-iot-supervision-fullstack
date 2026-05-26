@@ -10,6 +10,7 @@ services:
     environment:
       NODE_ENV: development
       PORT: 3000
+      FRONTEND_ORIGIN: ${FRONTEND_ORIGIN}
       # On utilise le réseau interne de Docker Compose
       # Nos conteneurs communiquent directement via leur nom de service
       DB_HOST: postgres
