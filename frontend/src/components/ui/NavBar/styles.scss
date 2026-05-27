@@ -1,0 +1,52 @@
+@use '../../../styles/vars';
+
+.nav-bar__wrapper {
+    display: flex;
+    justify-content: center;
+
+    .nav-bar {
+        padding: 1rem;
+        position: fixed;
+        bottom: 1rem;
+        min-width: 360px;
+        z-index: 100;
+        border-radius: 50px;
+        box-shadow: vars.$nav-bar-shadow;
+    
+        &__list {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: .5rem
+        }
+    
+        &__link {
+            padding: .5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            gap: .25rem;
+        }
+        
+        &__wrapper__icon {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 55px;
+            width: 55px;
+            border: 1px solid vars.$border-color;
+            border-radius: 50%;
+            background-color: vars.$primary-color-light;
+        }
+        
+        &__wrapper__icon--active {
+            border: 2px solid vars.$primary-color-dark;
+            background-color: vars.$active-btn-color;
+        }
+
+        &__label {
+            font-size: 11px;
+        }
+    }
+}
