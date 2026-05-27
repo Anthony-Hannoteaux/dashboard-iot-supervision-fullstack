@@ -1,5 +1,9 @@
 @use './vars';
 
 body {
-    font-family: vars.$primary-font ;
+    background-color: vars.$background-color;
+    color: vars.$primary-text-color;
+    font-family: vars.$primary-font;
+    font-size: vars.$body-txt-size;
+    font-weight: vars.$body-txt-weight;
 }

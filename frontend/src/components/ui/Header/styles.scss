@@ -1,0 +1,19 @@
+@use '../../../styles/vars';
+
+.header {
+    padding: 2rem;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    align-items: center;
+
+    &__logo {
+        height: auto;
+        width: 50px;
+    }
+
+    .main-title {
+        font-size: vars.$h1-txt-size;
+        font-weight: vars.$h1-txt-weight;
+        color: vars.$primary-color-dark;
+    }
+}
