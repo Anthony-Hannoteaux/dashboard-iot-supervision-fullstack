@@ -12,14 +12,14 @@
         z-index: 100;
         border-radius: 50px;
         box-shadow: vars.$nav-bar-shadow;
-    
+
         &__list {
             display: flex;
             justify-content: space-between;
             align-items: center;
             gap: .5rem
         }
-    
+
         &__link {
             padding: .5rem;
             display: flex;
@@ -27,8 +27,14 @@
             align-items: center;
             text-decoration: none;
             gap: .25rem;
+
+            &:focus-visible {
+                outline: 2px solid vars.$primary-color;
+                outline-offset: 10px;
+                border-radius: 999px;
+            }
         }
-        
+
         &__wrapper__icon {
             display: flex;
             justify-content: center;
@@ -38,8 +44,15 @@
             border: 1px solid vars.$border-color;
             border-radius: 50%;
             background-color: vars.$primary-color-light;
+            
+            transition: all .3s ease;
+            
+            &:hover {
+                border: 1px solid vars.$primary-color-dark;
+                background-color: vars.$hover-color;
+            }
         }
-        
+
         &__wrapper__icon--active {
             border: 2px solid vars.$primary-color-dark;
             background-color: vars.$active-btn-color;
