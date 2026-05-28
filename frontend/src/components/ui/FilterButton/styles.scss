@@ -1,0 +1,33 @@
+@use '../../../styles/vars';
+
+.filter-btn {
+    min-width: 70px;
+    padding: .45rem 1rem;
+    background-color: vars.$primary-color-light;
+    color: vars.$primary-text-color;
+    font-size: vars.$caption-txt-size;
+    font-weight: vars.$caption-txt-weight;
+    border: 2px solid vars.$border-color;
+    border-radius: 15px;
+    box-shadow: vars.$btn-shadow;
+
+    cursor: pointer;
+
+    transition: all .3s ease;
+    
+    &:hover {
+        background-color: vars.$hover-color;
+    }
+
+    // Stylisation ajouté pour la navigation clavier
+    &:focus-visible {
+        outline: 2px solid vars.$primary-color;
+        outline-offset: 3px;
+    }
+
+    &--active {
+        border-color: vars.$primary-color;
+        background-color: vars.$active-btn-color;
+        color: vars.$primary-color-dark;
+    }
+}

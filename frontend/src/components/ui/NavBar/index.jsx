@@ -10,7 +10,6 @@ const navBarLinks = [
         path: "/",
         icon: Home
     },
-
     {
         label: "Relevés",
         path: "/readings",
