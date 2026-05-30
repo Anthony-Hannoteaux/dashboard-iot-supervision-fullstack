@@ -1,7 +1,7 @@
 import Header from "../../components/ui/Header";
 import NavBar from "../../components/ui/NavBar";
 import FilterButtonLayout from "../../components/ui/FilterLayout";
-import FilterButton from "../../components/ui/FilterButton";
+import DashboardSection from "../../components/ui/DashboardSection";
 
 export default function HomePage() {
 
@@ -13,8 +13,9 @@ export default function HomePage() {
             <main>
                 <NavBar activeTitle={pageTitle}/>
                 <FilterButtonLayout/>
-                <h1>HomePage - Dashboard Supervision IoT</h1>
-                <p>Test de rendu et test des routes avec ReactRouter</p>
+                <DashboardSection
+                lastMeasure={"10 : 10"}
+                />
             </main>
         </>
     )

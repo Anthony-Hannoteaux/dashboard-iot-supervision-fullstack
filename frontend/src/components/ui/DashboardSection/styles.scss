@@ -1,0 +1,6 @@
+@use '../../../styles/vars';
+
+.last-measure {
+    font-size: vars.$caption-txt-size;
+    font-weight: vars.$caption-txt-weight;
+}
