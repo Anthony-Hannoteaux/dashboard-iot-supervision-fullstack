@@ -1,4 +1,5 @@
 import FilterButton from "../FilterButton";
+import './styles.scss'
 import { useState } from "react";
 
 // Composant servant de layout aux boutons de filtrages

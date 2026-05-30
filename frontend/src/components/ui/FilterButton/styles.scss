@@ -25,6 +25,12 @@
         outline-offset: 3px;
     }
 
+    &:disabled {
+        background-color: vars.$muted-btn-color;
+        color: vars.$muted-text-color;
+        border-color: vars.$border-muted-color;
+    }
+
     &--active {
         border-color: vars.$primary-color;
         background-color: vars.$active-btn-color;
