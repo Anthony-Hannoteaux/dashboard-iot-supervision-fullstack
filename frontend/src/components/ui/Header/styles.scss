@@ -6,6 +6,12 @@
     grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
     align-items: center;
 
+    :focus-visible {
+        outline: 2px solid vars.$primary-color;
+        outline-offset: 10px;
+        border-radius: 999px;
+    }
+
     &__logo {
         height: auto;
         width: 50px;

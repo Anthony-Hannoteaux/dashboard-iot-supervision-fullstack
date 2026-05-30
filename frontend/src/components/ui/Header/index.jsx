@@ -10,12 +10,14 @@ import './styles.scss';
 export default function Header({ title }) {
     return (
         <header className="header">
-            <Link
-            to="/"
-            aria-label="Retour vers l'accueil"
-            >
-                <img className="header__logo" src={LogoMobile} alt="" />
-            </Link>
+            <div>
+                <Link
+                    to="/"
+                    aria-label="Retour vers l'accueil"
+                >
+                    <img className="header__logo" src={LogoMobile} alt="" />
+                </Link>
+            </div>
             <h1 className="main-title" >{title}</h1>
         </header>
     )
