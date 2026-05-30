@@ -1,6 +1,18 @@
 @use '../../../styles/vars';
 
-.last-measure {
-    font-size: vars.$caption-txt-size;
-    font-weight: vars.$caption-txt-weight;
+.section-dashboard {
+    display: grid;
+    gap: 1rem;
+
+    .last-measure {
+        font-size: vars.$caption-txt-size;
+        font-weight: vars.$caption-txt-weight;
+}
+
+    .dashboard-section__wrapper {
+        display: grid;
+        justify-items: center;
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
 }

@@ -5,7 +5,9 @@ export default function DashboardSection({ lastMeasure, children }) {
         <section className="section section-dashboard">
             <span className="last-measure">Dernière mesure : {lastMeasure}</span>
             <h2 className="sr-only">Cartes de statut des capteurs</h2>
-            {children}
+            <div className='dashboard-section__wrapper'>
+                {children}
+            </div>
         </section>
     )
 }

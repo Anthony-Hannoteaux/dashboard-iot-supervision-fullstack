@@ -1,0 +1,66 @@
+@use '../../../styles/vars';
+
+// Style générale des composants Card
+.dashboard-card {
+    padding: 1rem;
+    width: 80%;
+    background-color: vars.$surface-color;
+    box-shadow: vars.$card-shadow;
+    border-radius: 15px;
+
+    // HEADER
+    &__header {
+        margin-bottom: 1rem;
+        border-bottom: 1px solid vars.$border-color;
+    }
+
+    &__title {
+        padding-left: 1rem;
+        margin-bottom: 1rem;
+        font-size: vars.$h3-txt-size;
+        font-weight: vars.$h3-txt-weight;
+        color: vars.$primary-color-dark;
+    }
+
+    // BODY
+    &__body {
+        display: flex;
+        justify-content: space-around;
+    }
+
+    &__measure__wrapper {
+        margin-bottom: 1rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: .5rem;
+        
+        .measure-type {
+            font-size: vars.$caption-txt-size;
+            font-weight: vars.$caption-txt-weight;
+            color: vars.$primary-color;
+        }
+
+        .measure-value {
+            font-size: vars.$data-txt-size;
+            font-weight: vars.$data-txt-weight;
+
+            &--temperature {
+                color: vars.$temperature-color;
+            }
+
+            &--humidity {
+                color: vars.$humidity-color;
+            }
+        }
+    }
+
+    // ASIDE
+    &__aside__title {
+        margin-bottom: 1rem;
+        padding-left: 1rem;
+        font-size: vars.$h4-txt-size;
+        font-weight: vars.$h4-txt-weight;
+        color: vars.$primary-color;
+    }
+}
